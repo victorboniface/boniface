@@ -38,7 +38,7 @@ def get_canli_tv_m3u():
         channels = data['Data']['AllChannels']
         print(f"✅ {len(channels)} kanal bulundu")
         
-        with open("yeni.m3u", "w", encoding="utf-8") as f:
+        with open("aynen.m3u", "w", encoding="utf-8") as f:
             f.write("#EXTM3U\n")
             
             kanal_sayisi = 0
