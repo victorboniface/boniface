@@ -57,7 +57,7 @@ def parse_m3u(file_path):
     return kanallar
 
 def update_kerim_m3u():
-    yeni_kanallar = parse_m3u('yeni.m3u')
+    yeni_kanallar = parse_m3u('aynen.m3u')
     hedef_dosya = 'Kanallar/boniface.m3u'
 
     if not os.path.exists(hedef_dosya):
