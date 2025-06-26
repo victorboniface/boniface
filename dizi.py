@@ -88,6 +88,71 @@ async def fetch_page(session, url, timeout=45):
         logger.error(f"[!] Sayfa getirme hatası ({url}): {e}")
         return None
 
+async def get_correct_domain_from_playhouse(session, file_id, timeout=15):
+    """Playhouse URL'ine istek atıp redirect edilen doğru domain'i bulur"""
+    playhouse_url = f"https://playhouse.premiumvideo.click/player/{file_id}"
+    
+    try:
+        logger.info(f"[*] Playhouse URL'ine redirect testi: {playhouse_url}")
+        
+        
+        async with session.get(playhouse_url, 
+                              headers=HEADERS, 
+                              timeout=aiohttp.ClientTimeout(total=timeout),
+                              allow_redirects=True) as response:
+            
+            final_url = str(response.url)
+            logger.info(f"[*] Final redirect URL: {final_url}")
+            
+            
+            domain_match = re.search(r'https://([^.]+)\.premiumvideo\.click', final_url)
+            if domain_match:
+                domain = domain_match.group(1)
+                logger.info(f"[✅] Redirect edilen domain bulundu: {domain}")
+                
+                
+                m3u8_url = f"https://{domain}.premiumvideo.click/uploads/encode/{file_id}/master.m3u8"
+                
+                
+                is_valid = await test_m3u8_url(session, m3u8_url)
+                if is_valid:
+                    logger.info(f"[✅] M3U8 URL doğrulandı: {m3u8_url}")
+                    return domain, m3u8_url
+                else:
+                    logger.warning(f"[⚠️] M3U8 URL doğrulanamadı ama domain bulundu: {domain}")
+                    return domain, m3u8_url
+            else:
+                logger.warning(f"[⚠️] Redirect URL'den domain çıkarılamadı: {final_url}")
+                
+                
+                logger.info(f"[*] Fallback: Eski domain test sistemi kullanılıyor")
+                return await find_working_domain_fallback(session, file_id)
+                
+    except asyncio.TimeoutError:
+        logger.warning(f"[⚠️] Playhouse timeout, fallback sistem kullanılıyor")
+        return await find_working_domain_fallback(session, file_id)
+    except Exception as e:
+        logger.warning(f"[⚠️] Playhouse hatası: {e}, fallback sistem kullanılıyor")
+        return await find_working_domain_fallback(session, file_id)
+
+async def find_working_domain_fallback(session, file_id, domains=["d1", "d2", "d3", "d4"]):
+    """Fallback: Eski sistem ile çalışan domain bulma"""
+    logger.info(f"[*] Fallback domain testi başlıyor...")
+    
+    for domain in domains:
+        m3u8_url = f"https://{domain}.premiumvideo.click/uploads/encode/{file_id}/master.m3u8"
+        
+        logger.info(f"[*] Fallback test: {domain}")
+        is_working = await test_m3u8_url(session, m3u8_url)
+        
+        if is_working:
+            logger.info(f"[✅] Fallback domain çalışıyor: {domain}")
+            return domain, m3u8_url
+    
+    
+    logger.warning(f"[⚠️] Hiçbir domain çalışmıyor! Default d2 kullanılacak.")
+    return "d2", f"https://d2.premiumvideo.click/uploads/encode/{file_id}/master.m3u8"
+
 async def test_m3u8_url(session, url, timeout=15):
     """Geliştirilmiş m3u8 URL test fonksiyonu"""
     try:
@@ -100,63 +165,33 @@ async def test_m3u8_url(session, url, timeout=15):
             logger.info(f"[DEBUG] Final URL: {final_url}")
             logger.info(f"[DEBUG] Status: {response.status}")
             logger.info(f"[DEBUG] Content-Type: {content_type}")
-            logger.info(f"[DEBUG] Content-Length: {content_length}")
             
             
             if response.status != 200:
                 logger.info(f"[DEBUG] Status code 200 değil: {response.status}")
                 return False
             
-            
+           
             if "premiumvideo.click" not in final_url:
                 logger.info(f"[DEBUG] Redirect: premiumvideo.click domain'inden çıkmış: {final_url}")
                 return False
             
             
-            valid_content_types = [
-                "application/vnd.apple.mpegurl",
-                "application/x-mpegurl", 
-                "text/plain",
-                "video/mp2t",
-                "application/octet-stream"
-            ]
-            
-           
             try:
                 content = await response.content.read(4096)
                 text = content.decode('utf-8', errors='ignore')
                 
-                logger.info(f"[DEBUG] İçerik ilk 200 karakter: {text[:200]}")
+                logger.info(f"[DEBUG] İçerik ilk 100 karakter: {text[:100]}")
                 
-               
+                
                 if not text.strip().startswith("#EXTM3U"):
                     logger.info(f"[DEBUG] İçerik #EXTM3U ile başlamıyor")
                     return False
                 
-                
-                required_m3u8_patterns = [
-                    r"#EXTM3U",  
-                ]
-                
-                
-                pattern_matches = sum(1 for pattern in required_m3u8_patterns if re.search(pattern, text, re.IGNORECASE))
-                
-                if pattern_matches == 0:
-                    logger.info(f"[DEBUG] Gerekli M3U8 pattern'leri bulunamadı")
-                    return False
-                
-                
+               
                 suspicious_patterns = [
-                    r"<html",
-                    r"<body",
-                    r"<title",
-                    r"error",
-                    r"not found",
-                    r"access denied",
-                    r"kerimkirac\.com",  
-                    r"404",
-                    r"403",
-                    r"500"
+                    r"<html", r"<body", r"<title", r"error", r"not found", 
+                    r"access denied", r"kerimkirac\.com", r"404", r"403", r"500"
                 ]
                 
                 for pattern in suspicious_patterns:
@@ -169,7 +204,7 @@ async def test_m3u8_url(session, url, timeout=15):
                     logger.info(f"[DEBUG] Content-Length çok küçük: {content_length}")
                     return False
                 
-               
+                
                 if "master.m3u8" not in final_url:
                     logger.info(f"[DEBUG] URL'de master.m3u8 yok: {final_url}")
                     return False
@@ -188,35 +223,6 @@ async def test_m3u8_url(session, url, timeout=15):
         logger.warning(f"[DEBUG] Test hatası: {e}")
         return False
 
-async def find_working_domain(session, file_id, domains=["d1", "d2"]):
-    """Geliştirilmiş çalışan domain bulma fonksiyonu"""
-    working_results = []
-    
-    
-    for domain in domains:
-        m3u8_url = f"https://{domain}.premiumvideo.click/uploads/encode/{file_id}/master.m3u8"
-        
-        logger.info(f"[*] Test ediliyor: {domain} - {m3u8_url}")
-        
-        
-        is_working = await test_m3u8_url(session, m3u8_url)
-        
-        if is_working:
-            logger.info(f"[✅] Domain çalışıyor: {domain}")
-            working_results.append((domain, m3u8_url))
-        else:
-            logger.info(f"[❌] Domain çalışmıyor: {domain}")
-    
-    
-    if working_results:
-        chosen_domain, chosen_url = working_results[0]
-        logger.info(f"[✅] Seçilen çalışan domain: {chosen_domain}")
-        return chosen_domain, chosen_url
-    
-    
-    logger.warning(f"[⚠️] Hiçbir domain çalışmıyor! Default olarak d2 kullanılacak ama bu link muhtemelen çalışmayacak.")
-    return "d2", f"https://d2.premiumvideo.click/uploads/encode/{file_id}/master.m3u8"
-
 async def get_series_from_page(session, page_num):
     """Belirli bir sayfadan dizi listesini alır"""
     diziler_url = f"{BASE_URL}/diziler?p={page_num}"
@@ -229,7 +235,7 @@ async def get_series_from_page(session, page_num):
     
     soup = BeautifulSoup(content, 'html.parser')
     
-   
+    
     series_links = []
     link_elements = soup.select(".uk-grid .uk-width-large-1-6 a.uk-position-cover")
     
@@ -263,7 +269,6 @@ async def get_series_from_page(session, page_num):
     
     
     if not has_next_page and series_links:
-        
         next_page_url = f"{BASE_URL}/diziler?p={page_num + 1}"
         next_content = await fetch_page(session, next_page_url)
         if next_content:
@@ -332,7 +337,6 @@ async def get_series_metadata(session, series_url):
 
     return title, logo_url
 
-
 async def get_episode_links(session, series_url):
     """Dizi sayfasından bölüm linklerini alır"""
     content = await fetch_page(session, series_url)
@@ -400,7 +404,7 @@ async def get_episode_links(session, series_url):
                         full_url = fix_url(href)
                     
                     if full_url and full_url != series_url and full_url not in [e[0] for e in episode_links]:
-                       
+                        
                         season_match = re.search(r'sezon[=-]?(\d+)', full_url, re.IGNORECASE)
                         season_num = int(season_match.group(1)) if season_match else 1
                         episode_links.append((full_url, season_num))
@@ -412,7 +416,7 @@ async def get_episode_links(session, series_url):
     return normalized_episodes
 
 async def extract_m3u8_from_episode(session, episode_url, season_num, episode_num):
-    """Bölüm sayfasından m3u8 linkini çıkarır"""
+    """Bölüm sayfasından m3u8 linkini çıkarır - YENİ SİSTEM"""
     content = await fetch_page(session, episode_url)
     if not content:
         return None, None, None
@@ -426,35 +430,74 @@ async def extract_m3u8_from_episode(session, episode_url, season_num, episode_nu
     logger.info(f"[*] İşleniyor: Sezon {season_num}, Bölüm {episode_num}")
     
     m3u8_url = None
-    iframe_url = None
     
     try:
         
-        scripts = soup.find_all('script')
-        for script in scripts:
-            script_content = script.get_text() or ""
-            
-            hex_pattern = re.compile(r'hexToString\w*\("([a-fA-F0-9]+)"\)')
-            hex_matches = hex_pattern.findall(script_content)
-            
-            if hex_matches:
-                logger.info(f"[+] Script içinde {len(hex_matches)} hex URL bulundu.")
-                for hex_value in hex_matches:
-                    try:
-                        decoded_url = bytes.fromhex(hex_value).decode('utf-8')
-                        if decoded_url and "/player" in decoded_url:
-                            iframe_url = fix_url(decoded_url)
-                            logger.info(f"[+] Hex'ten çözülen iframe URL: {iframe_url}")
-                            break
-                    except Exception as e:
-                        logger.error(f"[!] Hex çözme hatası: {e}")
-                
-                if iframe_url:
+        iframe_selectors = [
+            'iframe[title="playhouse"]',
+            'iframe[src*="playhouse.premiumvideo.click"]',
+            'iframe[src*="premiumvideo.click/player"]'
+        ]
+        
+        playhouse_url = None
+        file_id = None
+        
+        
+        for selector in iframe_selectors:
+            iframe_element = soup.select_one(selector)
+            if iframe_element:
+                src = iframe_element.get("src")
+                if src and "playhouse.premiumvideo.click" in src:
+                    if src.startswith("//"):
+                        src = "https:" + src
+                    playhouse_url = src
+                    logger.info(f"[+] Playhouse iframe bulundu: {playhouse_url}")
                     break
         
         
-        if not iframe_url:
-            iframe_selectors = [
+        if not playhouse_url:
+            scripts = soup.find_all('script')
+            for script in scripts:
+                script_content = script.get_text() or ""
+                
+                hex_pattern = re.compile(r'hexToString\w*\("([a-fA-F0-9]+)"\)')
+                hex_matches = hex_pattern.findall(script_content)
+                
+                if hex_matches:
+                    logger.info(f"[+] Script içinde {len(hex_matches)} hex URL bulundu.")
+                    for hex_value in hex_matches:
+                        try:
+                            decoded_url = bytes.fromhex(hex_value).decode('utf-8')
+                            if decoded_url and "playhouse.premiumvideo.click" in decoded_url:
+                                playhouse_url = decoded_url
+                                if playhouse_url.startswith("//"):
+                                    playhouse_url = "https:" + playhouse_url
+                                logger.info(f"[+] Hex'ten çözülen playhouse URL: {playhouse_url}")
+                                break
+                        except Exception as e:
+                            logger.error(f"[!] Hex çözme hatası: {e}")
+                    
+                    if playhouse_url:
+                        break
+        
+       
+        if playhouse_url:
+            
+            playhouse_match = re.search(r'playhouse\.premiumvideo\.click/player/([a-zA-Z0-9]+)', playhouse_url)
+            if playhouse_match:
+                file_id = playhouse_match.group(1)
+                logger.info(f"[+] Playhouse File ID bulundu: {file_id}")
+                
+                
+                working_domain, m3u8_url = await get_correct_domain_from_playhouse(session, file_id)
+                logger.info(f"[+] Bulunan domain: {working_domain}, M3U8: {m3u8_url}")
+        
+        
+        if not m3u8_url:
+            logger.info("[*] Playhouse bulunamadı, eski sistem ile deneniyor...")
+            
+            
+            iframe_selectors_fallback = [
                 "iframe#londonIframe",
                 "iframe[src*=premiumvideo]",
                 "iframe[data-src*=premiumvideo]",
@@ -462,7 +505,7 @@ async def extract_m3u8_from_episode(session, episode_url, season_num, episode_nu
                 "iframe"
             ]
             
-            for selector in iframe_selectors:
+            for selector in iframe_selectors_fallback:
                 iframe_element = soup.select_one(selector)
                 if iframe_element:
                     src = iframe_element.get("src")
@@ -471,48 +514,17 @@ async def extract_m3u8_from_episode(session, episode_url, season_num, episode_nu
                     
                     if src and src != "about:blank":
                         iframe_url = fix_url(src)
-                        logger.info(f"[+] İframe URL bulundu: {iframe_url}")
-                        break
-        
-        
-        if iframe_url:
-            
-            premium_video_match = re.search(r'premiumvideo\.click/player\.php\?file_id=([a-zA-Z0-9]+)', iframe_url)
-            playhouse_match = re.search(r'playhouse\.premiumvideo\.click/player/([a-zA-Z0-9]+)', iframe_url)
-            
-            if premium_video_match:
-                file_id = premium_video_match.group(1)
-                logger.info(f"[+] File ID bulundu: {file_id}")
-                
-                
-                working_domain, m3u8_url = await find_working_domain(session, file_id)
-                logger.info(f"[+] Seçilen domain: {working_domain}")
-                
-            elif playhouse_match:
-                file_id = playhouse_match.group(1)
-                logger.info(f"[+] Playhouse File ID bulundu: {file_id}")
-                
-                
-                working_domain, m3u8_url = await find_working_domain(session, file_id)
-                logger.info(f"[+] Seçilen domain: {working_domain}")
-            
-            else:
-               
-                iframe_content = await fetch_page(session, iframe_url)
-                if iframe_content:
-                   
-                    m3u8_pattern = re.compile(r'file\s*:\s*[\'"](.*?\.m3u8.*?)[\'"]')
-                    m3u8_match = m3u8_pattern.search(iframe_content)
-                    
-                    if m3u8_match:
-                        m3u8_url = m3u8_match.group(1)
-                        logger.info(f"[+] m3u8 URL bulundu: {m3u8_url}")
+                        logger.info(f"[+] Fallback iframe URL: {iframe_url}")
                         
-                        
-                        if m3u8_url.startswith("/"):
-                            parsed_iframe = urlparse(iframe_url)
-                            iframe_base = f"{parsed_iframe.scheme}://{parsed_iframe.netloc}"
-                            m3u8_url = urljoin(iframe_base, m3u8_url)
+                       
+                        premium_video_match = re.search(r'premiumvideo\.click/player\.php\?file_id=([a-zA-Z0-9]+)', iframe_url)
+                        if premium_video_match:
+                            file_id = premium_video_match.group(1)
+                            logger.info(f"[+] Fallback File ID: {file_id}")
+                            
+                            
+                            working_domain, m3u8_url = await find_working_domain_fallback(session, file_id)
+                            break
     
     except Exception as e:
         logger.error(f"[!] Bölüm işleme genel hatası: {e}")
