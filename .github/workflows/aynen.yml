@@ -37,8 +37,7 @@ jobs:
       - name: MonoTV.py Çalıştır
         run: python MonoTV.py
 
-      - name: dizi.py Çalıştır
-        run: python dizi.py
+      
 
       - name: Selcuk.py Çalıştır
         run: python selcuk.py
