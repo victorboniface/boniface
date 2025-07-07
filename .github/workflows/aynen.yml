@@ -30,21 +30,27 @@ jobs:
           
       - name: TRGoals.py Çalıştır
         run: python TRGoals.py
+        continue-on-error: true
         
       - name: retv.py Çalıştır
         run: python retv.py
+        continue-on-error: true
         
       - name: MonoTV.py Çalıştır
         run: python MonoTV.py
+        continue-on-error: true
       
       - name: Selcuk.py Çalıştır
         run: python selcuk.py
+        continue-on-error: true
         
       - name: Sporcafe.py Çalıştır
         run: python sporcafe.py
+        continue-on-error: true
         
       - name: rectv Çalıştır
         run: python rectv.py
+        continue-on-error: true
           
       - name: Değişiklik Kontrolü
         id: degisiklik_kontrol
