@@ -196,7 +196,7 @@ class M3UUpdater:
 def main():
     
     retv_path = "retv.m3u"
-    boniface_path = "kanallar/boniface.m3u"
+    boniface_path = "Kanallar/boniface.m3u"
     
     
     updater = M3UUpdater()
