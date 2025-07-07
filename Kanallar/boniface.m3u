@@ -201,25 +201,7 @@ https://saran-live.ercdn.net/natgeowild/index.m3u8
 
 
 
-
-#EXTINF:-1 tvg-name="TARİH TV" tvg-id=""  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/500/500/channels/logos/1da9e4ec-4e08-4bc9-bf29-5060d63bca07.png" group-title="Belgesel",TARİH TV
-#EXTVLCOPT:http-user-agent=okhttp/4.12.0
-https://tv1.arectv30.sbs/live/tarihtv.m3u8
-
-
-#EXTINF:-1 tvg-name="Docubox" tvg-id=""  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/8/8a/DocuBox_HD_logo.png" group-title="Belgesel",Docubox
-#EXTVLCOPT:http-user-agent=okhttp/4.12.0
-https://tv1.arectv30.sbs/live/docubox.m3u8
-
-
-#EXTINF:-1 tvg-name="DISCOVERY CHANNEL" tvg-id=""  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/0/0/Vod/HLS/aaac1290-6d58-4036-b106-a7026a4c1bfc.png" group-title="Belgesel",DISCOVERY CHANNEL
-#EXTVLCOPT:http-user-agent=okhttp/4.12.0
-https://tv1.arectv30.sbs/live/discovery.m3u8
-
-
-#EXTINF:-1 tvg-name="DISCOVERY SCIENCE" tvg-id=""  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Discovery_Science_2017_Logo.svg/1200px-Discovery_Science_2017_Logo.svg.png" group-title="Belgesel",DISCOVERY SCIENCE
-#EXTVLCOPT:http-user-agent=okhttp/4.12.0
-https://tv1.arectv30.sbs/live/discs.m3u8
+8
 
 
 #EXTINF:-1 tvg-name="TGRT Belgesel" tvg-language="Turkish" tvg-country="TR" tvg-id="Belgesel_TGRT" tvg-logo="https://www.tgrtbelgesel.com.tr/wp-content/uploads/2021/08/TGRT_Belgesel_Logo.png" group-title="Belgesel",TGRT Belgesel
@@ -258,7 +240,7 @@ https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemaaksiyon_stream/index.m3u8?
 #EXTINF:-1 tvg-id="70" tvg-country="TR" tvg-language="Turkish" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/bein-box-office-1-tr.png" tvg-name="Bein Box Office 1" group-title="Sinema",Bein Box Office 1
 #EXTVLCOPT:http-user-agent=okhttp/4.12.0
 #EXTVLCOPT:http-referrer=https://twitter.com
-https://tv.arectv34.sbs/live/box1.m3u8
+https://tv.arectv34.sbs/live/box.m3u8
 
 #EXTINF:-1 tvg-id="69" tvg-country="TR" tvg-language="Turkish" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/bein-box-office-2-tr.png" tvg-name="Bein Box Office 2" group-title="Sinema",Bein Box Office 2
 #EXTVLCOPT:http-user-agent=okhttp/4.12.0
