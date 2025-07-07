@@ -5,7 +5,7 @@ concurrency:
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *'  
+    - cron: '*/10 * * * *'
 jobs:
   BirlesikGuncelleme:
     runs-on: ubuntu-latest
@@ -24,44 +24,24 @@ jobs:
           
       - name: Gereksinimleri Kur
         run: |
-         python -m ensurepip
-         python -m pip install --upgrade pip setuptools wheel
-         pip install aiohttp beautifulsoup4 requests httpx parsel Kekik
-
-
+          python -m pip install --upgrade pip
+          pip install -U setuptools wheel
+          pip install aiohttp beautifulsoup4 requests httpx parsel Kekik cloudscraper
           
       - name: TRGoals.py Çalıştır
         run: python TRGoals.py
-
-      - name: re.py Çalıştır
+        
+      - name: retv.py Çalıştır
         run: python retv.py
         
       - name: MonoTV.py Çalıştır
         run: python MonoTV.py
-
       
-
       - name: Selcuk.py Çalıştır
         run: python selcuk.py
-
+        
       - name: Sporcafe.py Çalıştır
         run: python sporcafe.py
-        
-      
-
-      
-
-      
-
-      
-
-
-
-
-        
-      
-      
-      
           
       - name: Değişiklik Kontrolü
         id: degisiklik_kontrol
@@ -71,8 +51,8 @@ jobs:
       - name: Değişiklikleri Commit Et
         if: steps.degisiklik_kontrol.outputs.degisiklik == 'true'
         run: |
-         git config user.name "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-         git add .
-         git commit -m "aynen - $GITHUB_SHA"
-         git push
+          git add .
+          git commit -m "aynen - $GITHUB_SHA"
+          git push
