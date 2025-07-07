@@ -144,7 +144,8 @@ class M3UUpdater:
                     
                     new_lines.append(line)
             
-            new_block = '#EXTINF:-1' + '\n'.join(new_lines) + '\n'
+            new_block = '#EXTINF:-1 ' + '\n'.join(new_lines) + '\n'
+
             
             
             content = content.replace(old_block, new_block)
