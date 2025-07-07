@@ -42,6 +42,9 @@ jobs:
         
       - name: Sporcafe.py Çalıştır
         run: python sporcafe.py
+        
+      - name: rectv Çalıştır
+        run: python rectv.py
           
       - name: Değişiklik Kontrolü
         id: degisiklik_kontrol
