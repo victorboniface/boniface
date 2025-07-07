@@ -34,7 +34,7 @@ jobs:
         run: python TRGoals.py
 
       - name: re.py Çalıştır
-        run: python re.py
+        run: python retv.py
         
       - name: MonoTV.py Çalıştır
         run: python MonoTV.py
