@@ -218,8 +218,6 @@ https://ottcdn.kablowebtv.net/live_turksat_sub/fx_stream/index.m3u8?wmsAuthSign=
 #EXTINF:-1 tvg-name="Sinema Tv" tvg-id="1908"  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/0/0/Vod/HLS/22c5fe05-d70b-4c68-98fb-03bae4870e81.png" group-title="Sinema",Sinema Tv
 https://ottcdn.kablowebtv.net/live_turksat_sub3/sinematv_stream/index.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjUgMzozOTozOCBBTSZoYXNoX3ZhbHVlPU8xOWRKY1ltSUNUODlLcFlkZ3dQSWc9PSZ2YWxpZG1pbnV0ZXM9Mjg4MCZpZD0wOTNkNzIwYS01MDJjLTQxZWQtYTgwZi0yYjgxNjk4NGZiOTUsODk3NDFmZWMtMWQzMy00YzAwLWFmY2QtM2ZkYWZlMGI2YTJkLDE1MmJkNTM5LTYyMjAtNDQyNy1hOTE1LWJmNGJkMDY4ZDdlOCxhNjk5YjgzZi04MjZiLTRkOTktOTM2MS1jOGEzMTMyMThkNDYsMCw6OmZmZmY6MTAuMC4wLjU=
 
-#EXTINF:-1 tvg-name="Sinema Tv 2" tvg-logo="https://www.tvyayinakisi.com/wp-content/uploads/2020/05/sinema-2-tv.png" tvg-language="Turkish" tvg-country="TR" group-title="Sinema",Sinema Tv 2
-https://live-cdn-65984.varplaycdn.cfd/sinematv2/index.m3u8
 
 #EXTINF:-1 tvg-name="Sinema Yerli"  tvg-language="Turkish" tvg-country="TR" tvg-id="3304" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/500/500/channels/logos/ae3d90a0-37ee-4e48-a6bc-1375e5f1329a.png" group-title="Sinema",Sinema Yerli
 https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemayerli_stream/index.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjUgMzozOTozOCBBTSZoYXNoX3ZhbHVlPU8xOWRKY1ltSUNUODlLcFlkZ3dQSWc9PSZ2YWxpZG1pbnV0ZXM9Mjg4MCZpZD0wOTNkNzIwYS01MDJjLTQxZWQtYTgwZi0yYjgxNjk4NGZiOTUsODk3NDFmZWMtMWQzMy00YzAwLWFmY2QtM2ZkYWZlMGI2YTJkLDE1MmJkNTM5LTYyMjAtNDQyNy1hOTE1LWJmNGJkMDY4ZDdlOCxhNjk5YjgzZi04MjZiLTRkOTktOTM2MS1jOGEzMTMyMThkNDYsMCw6OmZmZmY6MTAuMC4wLjU=
@@ -227,14 +225,12 @@ https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemayerli_stream/index.m3u8?wm
 #EXTINF:-1 tvg-name="Sinema Aile"  tvg-language="Turkish" tvg-country="TR" tvg-id="1911" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/500/500/channels/logos/c8283b71-81f8-4fc6-8e48-6bb8f7f49ad7.png" group-title="Sinema",Sinema Aile
 https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemaaile_stream/index.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjUgMzozOTozOCBBTSZoYXNoX3ZhbHVlPU8xOWRKY1ltSUNUODlLcFlkZ3dQSWc9PSZ2YWxpZG1pbnV0ZXM9Mjg4MCZpZD0wOTNkNzIwYS01MDJjLTQxZWQtYTgwZi0yYjgxNjk4NGZiOTUsODk3NDFmZWMtMWQzMy00YzAwLWFmY2QtM2ZkYWZlMGI2YTJkLDE1MmJkNTM5LTYyMjAtNDQyNy1hOTE1LWJmNGJkMDY4ZDdlOCxhNjk5YjgzZi04MjZiLTRkOTktOTM2MS1jOGEzMTMyMThkNDYsMCw6OmZmZmY6MTAuMC4wLjU=
 
-#EXTINF:-1 tvg-name="Sinema Aile 2"  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/sinema-aile2-tr.png" group-title="Sinema",Sinema Aile 2
-https://live-cdn-65984.varplaycdn.cfd/sinemaaile2/index.m3u8
+
 
 #EXTINF:-1 tvg-name="Sinema 1001"  tvg-language="Turkish" tvg-country="TR" tvg-id="2602" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/500/500/channels/logos/8d9fbebd-cade-492d-9cb4-6522cb558794.png" group-title="Sinema",Sinema 1001
 https://ottcdn.kablowebtv.net/live_turksat_sub3/sinema1001_stream/index.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjUgMzozOTozOCBBTSZoYXNoX3ZhbHVlPU8xOWRKY1ltSUNUODlLcFlkZ3dQSWc9PSZ2YWxpZG1pbnV0ZXM9Mjg4MCZpZD0wOTNkNzIwYS01MDJjLTQxZWQtYTgwZi0yYjgxNjk4NGZiOTUsODk3NDFmZWMtMWQzMy00YzAwLWFmY2QtM2ZkYWZlMGI2YTJkLDE1MmJkNTM5LTYyMjAtNDQyNy1hOTE1LWJmNGJkMDY4ZDdlOCxhNjk5YjgzZi04MjZiLTRkOTktOTM2MS1jOGEzMTMyMThkNDYsMCw6OmZmZmY6MTAuMC4wLjU=
 
-#EXTINF:-1 tvg-name="Sinema 1002"  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/sinema-1002-tr.png" group-title="Sinema",Sinema 1002
-https://live-cdn-65984.varplaycdn.cfd/sinema1002/index.m3u8
+
 
 #EXTINF:-1 tvg-name="Sinema Komedi"  tvg-language="Turkish" tvg-country="TR" tvg-id="1110" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/500/500/channels/logos/4145ea10-96ad-400d-8870-f22a075f4add.png" group-title="Sinema",Sinema Komedi
 https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemakomedi_stream/index.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjUgMzozOTozOCBBTSZoYXNoX3ZhbHVlPU8xOWRKY1ltSUNUODlLcFlkZ3dQSWc9PSZ2YWxpZG1pbnV0ZXM9Mjg4MCZpZD0wOTNkNzIwYS01MDJjLTQxZWQtYTgwZi0yYjgxNjk4NGZiOTUsODk3NDFmZWMtMWQzMy00YzAwLWFmY2QtM2ZkYWZlMGI2YTJkLDE1MmJkNTM5LTYyMjAtNDQyNy1hOTE1LWJmNGJkMDY4ZDdlOCxhNjk5YjgzZi04MjZiLTRkOTktOTM2MS1jOGEzMTMyMThkNDYsMCw6OmZmZmY6MTAuMC4wLjU=
@@ -243,8 +239,7 @@ https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemakomedi_stream/index.m3u8?w
 #EXTINF:-1 tvg-name="Sinema Aksiyon"  tvg-language="Turkish" tvg-country="TR" tvg-id="1109" tvg-logo="https://feo.kablowebtv.com/resize/168A635D265A4328C2883FB4CD8FF/500/500/channels/logos/bd434731-0e47-4a37-997e-49f71340fcc6.png" group-title="Sinema",Sinema Aksiyon
 https://ottcdn.kablowebtv.net/live_turksat_sub3/sinemaaksiyon_stream/index.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjUgMzozOTozOCBBTSZoYXNoX3ZhbHVlPU8xOWRKY1ltSUNUODlLcFlkZ3dQSWc9PSZ2YWxpZG1pbnV0ZXM9Mjg4MCZpZD0wOTNkNzIwYS01MDJjLTQxZWQtYTgwZi0yYjgxNjk4NGZiOTUsODk3NDFmZWMtMWQzMy00YzAwLWFmY2QtM2ZkYWZlMGI2YTJkLDE1MmJkNTM5LTYyMjAtNDQyNy1hOTE1LWJmNGJkMDY4ZDdlOCxhNjk5YjgzZi04MjZiLTRkOTktOTM2MS1jOGEzMTMyMThkNDYsMCw6OmZmZmY6MTAuMC4wLjU=
 
-#EXTINF:-1  tvg-name="Sinema Aksiyon 2"  tvg-language="Turkish" tvg-country="TR" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/sinema-aksiyon2-tr.png" group-title="Sinema",Sinema Aksiyon 2
-https://live-cdn-65984.varplaycdn.cfd/sinemaaksiyon2/index.m3u8
+
 
 
 #EXTINF:-1 tvg-id="70" tvg-country="TR" tvg-language="Turkish" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/bein-box-office-1-tr.png" tvg-name="Bein Box Office 1" group-title="Sinema",Bein Box Office 1
