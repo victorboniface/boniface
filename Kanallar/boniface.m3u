@@ -490,7 +490,15 @@ https://r0.4928d54d950ee70q17.lat/yayinsms2.m3u8
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://lll.istekbet3.tv/yayinsms2.m3u8
 
+#EXTINF:-1 tvg-name="S Sport 1 Plus A" tvg-language="Turkish" tvg-country="TR" tvg-id="Spor_SSPORTPLUSA" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/s-sport-plus-tr.png" group-title="Spor",S Sport Plus A
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
+#EXTVLCOPT:http-referrer=https://trgoals1352.xyz/
+https://r0.4928d54d950ee70q17.lat/yayinex1.m3u8
 
+#EXTINF:-1 tvg-name="S Sport 1 Plus B" tvg-language="Turkish" tvg-country="TR" tvg-id="Spor_SSPORTPLUSB" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/s-sport-plus-tr.png" group-title="Spor",S Sport Plus B
+#EXTVLCOPT:http-user-agent=okhttp/4.12.0
+#EXTVLCOPT:http-referrer=https://twitter.com
+https://tv.arectv34.sbs/live/pl1.m3u8
 
 
 #EXTINF:-1 tvg-name="S Sport 1 | A" tvg-language="Turkish" tvg-country="TR" tvg-id="1810" tvg-logo="https://itv224226.tmp.tivibu.com.tr:6430/images/poster/20230302923239.png" group-title="Spor",S Sport
