@@ -490,6 +490,13 @@ https://r0.4928d54d950ee70q17.lat/yayinsms2.m3u8
 #EXTVLCOPT:http-referrer=https://monotv523.com/
 https://lll.istekbet3.tv/yayinsms2.m3u8
 
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/S_Sport_Plus_Logo.png/250px-S_Sport_Plus_Logo.png" group-title="Spor",S Sport + HD
+https://live-cdn-65984.varplaycdn.cfd/901/index.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/S_Sport_Plus_Logo.png/250px-S_Sport_Plus_Logo.png" group-title="Spor",S Sport +2 HD
+https://live-cdn-65984.varplaycdn.cfd/902/index.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/S_Sport_Plus_Logo.png/250px-S_Sport_Plus_Logo.png" group-title="Spor",S Sport +3 HD
+https://live-cdn-65984.varplaycdn.cfd/903/index.m3u8
+
 #EXTINF:-1 tvg-name="S Sport 1 Plus A" tvg-language="Turkish" tvg-country="TR" tvg-id="Spor_SSPORTPLUSA" tvg-logo="https://raw.githubusercontent.com/GitLatte/m3ueditor/refs/heads/site/images/kanal-gorselleri/turkiye/s-sport-plus-tr.png" group-title="Spor",S Sport Plus A
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5)
 #EXTVLCOPT:http-referrer=https://trgoals1352.xyz/
